@@ -1,6 +1,7 @@
 package com.ms.user.controller.docs;
 
 
+import com.ms.user.dto.UserDto;
 import com.ms.user.model.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,5 +33,5 @@ public interface UserDoc {
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
             )
     })
-    ResponseEntity<UserEntity> create(@RequestBody UserEntity userEntity);
+    ResponseEntity<UserEntity> create(@RequestBody UserDto userDto);
 }

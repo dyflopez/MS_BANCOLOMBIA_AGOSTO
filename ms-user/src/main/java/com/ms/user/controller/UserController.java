@@ -1,6 +1,7 @@
 package com.ms.user.controller;
 
 import com.ms.user.controller.docs.UserDoc;
+import com.ms.user.dto.UserDto;
 import com.ms.user.model.UserEntity;
 import com.ms.user.service.IUserService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class UserController implements UserDoc {
     private  final IUserService iUserService;
 
     @PostMapping
-    public ResponseEntity<UserEntity> create(@RequestBody UserEntity userEntity){
-        return  iUserService.create(userEntity);
+    public ResponseEntity<UserEntity> create(@RequestBody UserDto userDto){
+        return  iUserService.create(userDto);
     }
 }
