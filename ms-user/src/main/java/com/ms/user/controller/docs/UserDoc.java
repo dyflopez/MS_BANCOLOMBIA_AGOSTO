@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "user controller" , description = "API exposed for CRUD operations on users")
@@ -35,4 +36,6 @@ public interface UserDoc {
             )
     })
     ResponseEntity<UserEntity> create(@RequestBody @Valid UserDto userDto);
+
+    ResponseEntity<?> getUserById(@PathVariable("id") String id);
 }

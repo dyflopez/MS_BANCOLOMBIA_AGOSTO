@@ -6,10 +6,7 @@ import com.ms.user.model.UserEntity;
 import com.ms.user.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -19,7 +16,13 @@ public class UserController implements UserDoc {
     private  final IUserService iUserService;
 
     @PostMapping
-    public ResponseEntity<UserEntity> create(@RequestBody UserDto userDto){
+    public ResponseEntity<UserEntity> create(UserDto userDto){
         return  iUserService.create(userDto);
+    }
+
+    @Override
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(String id) {
+        return iUserService.getById(id);
     }
 }

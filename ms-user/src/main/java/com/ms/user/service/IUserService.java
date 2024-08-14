@@ -6,4 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface IUserService {
     ResponseEntity<UserEntity> create(UserDto userDto);
+
+    ResponseEntity<?> getById(String id);
 }

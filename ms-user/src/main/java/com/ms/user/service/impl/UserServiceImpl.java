@@ -1,6 +1,7 @@
 package com.ms.user.service.impl;
 
 import com.ms.user.dto.UserDto;
+import com.ms.user.exception.MyHandleException;
 import com.ms.user.model.UserEntity;
 import com.ms.user.repository.IUserRepository;
 import com.ms.user.service.IUserService;
@@ -20,10 +21,17 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ResponseEntity<UserEntity> create(UserDto userDto) {
-         try{
+             var userCurrently = this
+                     .iUserRepository
+                     .findByDocumentAndTypeDocument(userDto.getDocument(),userDto.getTypeDocument());
+
+             if(userCurrently.isPresent()){// TODO Create consts
+                 throw new MyHandleException("El usuario ya existe en la base de datos");
+             }
 
              UserEntity user = UserEntity
                      .builder()
+                     .id(UUID.randomUUID().toString())
                      .document(userDto.getDocument())
                      .typeDocument(userDto.getTypeDocument())
                      .name(userDto.getName())
@@ -33,10 +41,16 @@ public class UserServiceImpl implements IUserService {
              return ResponseEntity
                      .status(HttpStatus.CREATED)
                      .body(newUser);
-         }catch (Exception e){
-             return ResponseEntity
-                     .badRequest()
-                     .build();
-         }
+    }
+
+    @Override
+    public ResponseEntity<?> getById(String id) {
+
+        var user = this
+                .iUserRepository
+                .findById(id)
+                .orElseThrow(()-> new MyHandleException("El usuario no existe"));
+        return ResponseEntity
+                .ok(user);
     }
 }
