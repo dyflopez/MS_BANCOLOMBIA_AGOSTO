@@ -24,7 +24,6 @@ public class UserServiceImpl implements IUserService {
 
              UserEntity user = UserEntity
                      .builder()
-                     .id(UUID.randomUUID().toString())
                      .document(userDto.getDocument())
                      .typeDocument(userDto.getTypeDocument())
                      .name(userDto.getName())
