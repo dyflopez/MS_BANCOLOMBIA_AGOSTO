@@ -1,7 +1,9 @@
 package com.ms.user.service.impl;
 
+import com.ms.user.dto.EmailDTO;
 import com.ms.user.dto.UserDto;
 import com.ms.user.exception.MyHandleException;
+import com.ms.user.external.service.INotificationServiceFeingn;
 import com.ms.user.model.UserEntity;
 import com.ms.user.repository.IUserRepository;
 import com.ms.user.service.IUserService;
@@ -18,6 +20,8 @@ public class UserServiceImpl implements IUserService {
 
 
     private final IUserRepository iUserRepository;
+
+    private final INotificationServiceFeingn iNotificationServiceFeingn;
 
     @Override
     public ResponseEntity<UserEntity> create(UserDto userDto) {
@@ -37,6 +41,17 @@ public class UserServiceImpl implements IUserService {
                      .name(userDto.getName())
                      .build();
              var newUser = this.iUserRepository.save(user);
+
+             //TODO REFACTOR
+
+             var email=   EmailDTO
+                        .builder()
+                        .subject("Welome")
+                        .destination("daniel0223@hotmail.es")
+                        .body("Welcome to Boancaolombia")
+                        .build();
+
+             this.iNotificationServiceFeingn.sendEmail(email);
 
              return ResponseEntity
                      .status(HttpStatus.CREATED)

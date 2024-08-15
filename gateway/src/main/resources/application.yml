@@ -10,6 +10,10 @@ spring:
           uri: lb://MS-USER
           predicates:
             - Path=/v1/user/**
+        - id: NOTIFICATIONS
+          uri: lb://NOTIFICATIONS
+          predicates:
+            - Path=/v1/notification/**
 eureka:
   instance:
     prefer-ip-address: false
