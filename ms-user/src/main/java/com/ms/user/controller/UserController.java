@@ -17,7 +17,12 @@ public class UserController implements UserDoc {
 
     @PostMapping
     public ResponseEntity<UserEntity> create(UserDto userDto){
-        return  iUserService.create(userDto);
+        var salida =   iUserService.create(userDto);
+        var user = salida.getBody();
+        user.setName(userDto.getName().toLowerCase());
+
+
+        return  ResponseEntity.ok(user);
     }
 
     @Override

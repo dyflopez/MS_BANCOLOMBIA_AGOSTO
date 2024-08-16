@@ -2,9 +2,9 @@ spring:
   application:
     name: ms-user
   datasource:
-    url: jdbc:mysql://localhost:3308/user_db
-    username: root
-    password: Netec123
+    url: jdbc:mysql://bancolombia-data-base.czqiwxymquni.us-east-1.rds.amazonaws.com:3306/user_db
+    username: admin
+    password: daniel2315
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
